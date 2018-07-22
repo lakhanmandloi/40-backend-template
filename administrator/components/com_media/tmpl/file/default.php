@@ -1,11 +1,4 @@
 <?php
-
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Factory;
-use Joomla\CMS\Toolbar\Toolbar;
-use Joomla\CMS\Layout\LayoutHelper;
-use Joomla\CMS\Uri\Uri;
-use Joomla\CMS\Session\Session;
 /**
  * @package     Joomla.Administrator
  * @subpackage  com_media
@@ -15,6 +8,13 @@ use Joomla\CMS\Session\Session;
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Toolbar\Toolbar;
+use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Session\Session;
 
 // Add javascripts
 HTMLHelper::_('behavior.core');
@@ -49,11 +49,12 @@ $config = [
 	'editViewUrl'             => Uri::root() . 'administrator/index.php?option=com_media&view=file' . (!empty($tmpl) ? ('&tmpl=' . $tmpl) : ''),
 	'allowedUploadExtensions' => $params->get('upload_extensions', ''),
 	'maxUploadSizeMb'         => $params->get('upload_maxsize', 10),
-	'contents'                => base64_encode(file_get_contents($this->file->localpath)),
+	'contents'                => $this->file->content,
 ];
 
 Factory::getDocument()->addScriptOptions('com_media', $config);
 
+$this->useCoreUI = true;
 ?>
 <div class="row">
 	<form action="#" method="post" name="adminForm" id="media-form" class="form-validate col-md-12">

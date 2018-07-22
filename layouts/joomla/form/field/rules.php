@@ -56,6 +56,7 @@ $document = Factory::getDocument();
 // Add Javascript for permission change
 HTMLHelper::_('form.csrf');
 HTMLHelper::_('webcomponent', 'system/webcomponents/joomla-field-permissions.min.js', ['version' => 'auto', 'relative' => true]);
+HTMLHelper::_('webcomponent', 'system/webcomponents/joomla-tab.min.js', ['relative' => true, 'version' => 'auto']);
 
 // Load JavaScript message titles
 Text::script('ERROR');
@@ -107,7 +108,7 @@ $ajaxUri = Route::_('index.php?option=com_config&task=application.store&format=j
 							<tr>
 								<td headers="actions-th<?php echo $group->value; ?>">
 									<?php $description = (!empty($action->description)) ? ' class="hasTooltip" title="'
-										. \JHtml::_('tooltipText', $action->title, $action->description) . '"' : ''; ?>
+										. HTMLHelper::_('tooltipText', $action->title, $action->description) . '"' : ''; ?>
 									<label for="<?php echo $id; ?>_<?php echo $action->name; ?>_<?php echo $group->value; ?>"<?php echo $description; ?>>
 										<?php echo Text::_($action->title); ?>
 									</label>
